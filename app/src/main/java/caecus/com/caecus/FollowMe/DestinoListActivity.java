@@ -4,9 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -47,19 +44,7 @@ public class DestinoListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        // Show the Up button in the action bar.
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+
 
         View recyclerView = findViewById(R.id.destino_list);
         assert recyclerView != null;
@@ -124,12 +109,13 @@ public class DestinoListActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     if (mTwoPane) {
-                        Bundle arguments = new Bundle();
-                        arguments.putString(DestinoDetailFragment.ARG_ITEM_ID, holder.mItem.id);
+                        Bundle arguments = new
+                                Bundle(); //es la forma de pasarle info a los fragments, argumentos a traves de un bundle
+                        arguments.putString(DestinoDetailFragment.ARG_ITEM_ID, holder.mItem.id); //un bundle es como un mapa, para guardar variables
                         DestinoDetailFragment fragment = new DestinoDetailFragment();
                         fragment.setArguments(arguments);
                         getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.destino_detail_container, fragment)
+                                .replace(R.id.destino_detail_container, fragment)//destino_detail_container esta dentro del layout para tablet, en un Layout Frame donde es un lugar en blanco para poner un fragment
                                 .commit();
                     } else {
                         Context context = v.getContext();
